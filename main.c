@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "libft.h"
 
+void del(void *d)
+{
+	(void)d;
+}
+
 int main ()
 {
 	t_list *test = ft_lstnew("b");
@@ -9,8 +14,11 @@ int main ()
 
 	ft_lstadd_front(&test, new);
 	ft_lstadd_back(&test, ft_lstnew("d"));
-
-	ft_putstr_fd(ft_lstlast(test)->content, 1);
+	
+	new = test->next;
+	ft_lstdelone(test, del);
+	test = new;
+	ft_putendl_fd(ft_lstlast(test)->content, 1);
 
 	free(test);
 	return (0);
