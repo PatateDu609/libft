@@ -14,12 +14,8 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*s;
-	unsigned char	*d;
 	unsigned char	t[len];
 
-	s = (unsigned char*)src;
-	d = (unsigned char*)dst;
 	ft_memcpy(t, src, len);
 	ft_memcpy(dst, t, len);
 	return (dst);
