@@ -6,7 +6,7 @@
 /*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:51:27 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/05 15:32:39 by gboucett         ###   ########.fr       */
+/*   Updated: 2019/11/10 22:27:45 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
+	if (!src)
+		return (0);
 	i = 0;
-	while (i < (dstsize - 1) && src[i])
+	if (!dstsize)
+		return (ft_strlen(src));
+	while (--dstsize && src[i])
 	{
 		dst[i] = src[i];
 		i++;

@@ -6,7 +6,7 @@
 /*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 21:46:18 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/06 21:58:20 by gboucett         ###   ########.fr       */
+/*   Updated: 2019/11/10 22:30:58 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	while (*s)
-		write(fd, s++, 1);
+	if (s)
+		while (*s)
+			write(fd, s++, 1);
 }

@@ -1,25 +1,12 @@
-#include <stdio.h>
 #include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
-void del(void *d)
+int main()
 {
-	(void)d;
-}
-
-int main ()
-{
-	t_list *test = ft_lstnew("b");
-	test->next = ft_lstnew("c");
-	t_list *new = ft_lstnew("a");
-
-	ft_lstadd_front(&test, new);
-	ft_lstadd_back(&test, ft_lstnew("d"));
-	
-	new = test->next;
-	ft_lstdelone(test, del);
-	test = new;
-	ft_putendl_fd(ft_lstlast(test)->content, 1);
-
-	free(test);
+	//char **strs = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.", 'i');
+	char **strs = ft_split("bonjour je suis une bite", 't');
+	while (*strs)
+		printf("#%s#\n", *strs++);
 	return (0);
 }

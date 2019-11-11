@@ -6,7 +6,7 @@
 /*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 16:04:03 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/05 16:18:55 by gboucett         ###   ########.fr       */
+/*   Updated: 2019/11/07 16:48:57 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ char	*ft_strdup(const char *s1)
 	i = 0;
 	while (i++ < ft_strlen(s1))
 		result[i - 1] = s1[i - 1];
-	result[i] = 0;
+	result[i - 1] = 0;
 	return (result);
 }

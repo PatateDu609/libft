@@ -6,7 +6,7 @@
 /*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:09:15 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/06 23:14:24 by gboucett         ###   ########.fr       */
+/*   Updated: 2019/11/11 02:21:58 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ static int	ft_count_words(const char *s, char c)
 {
 	int		result;
 
+	if (!*s)
+		return (0);
 	result = *s++ == c ? 0 : 1;
-	while (*s && *(s + 1))
+	while (*s)
 	{
-		if (*s == c && *(s + 1) != c)
+		if (*(s - 1) == c && *s != c)
 			result++;
 		s++;
 	}
@@ -58,12 +60,26 @@ static char	*ft_createword(const char *s, char c)
 	return (word);
 }
 
+static void	ft_free(char **tofree, int count)
+{
+	int		i;
+
+	i = 0;
+	while (i < count)
+	{
+		free(tofree[i]);
+		tofree[i++] = NULL;
+	}
+}
+
 char		**ft_split(const char *s, char c)
 {
 	int		count;
 	char	**result;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	count = ft_count_words(s, c);
 	if (!(result = (char **)malloc(sizeof(char *) * (count + 1))))
 		return (NULL);
@@ -71,7 +87,14 @@ char		**ft_split(const char *s, char c)
 		s++;
 	i = 0;
 	while (i < count)
-		result[i++] = ft_createword(s, c);
+	{
+		result[i] = ft_createword(s, c);
+		if (!(result[i++]))
+		{
+			ft_free(result, i);
+			return (result);
+		}
+	}
 	result[i] = NULL;
 	return (result);
 }

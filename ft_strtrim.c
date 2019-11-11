@@ -6,7 +6,7 @@
 /*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 17:47:24 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/05 18:06:13 by gboucett         ###   ########.fr       */
+/*   Updated: 2019/11/11 00:26:45 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ static unsigned int		ft_trimedlen(const char *s1, const char *set)
 	return (size + 1);
 }
 
-#include <stdio.h>
-
 char					*ft_strtrim(const char *s1, const char *set)
 {
 	unsigned int	size;
 	char			*result;
 	unsigned int	i;
 
+	if (!s1)
+		return (NULL);
+	if (!set || !*set)
+		return (ft_strdup(s1));
 	size = ft_trimedlen(s1, set);
 	if (!(result = (char *)malloc(size + 1)))
 		return (NULL);

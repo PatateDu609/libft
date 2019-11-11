@@ -6,7 +6,7 @@
 /*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:22:36 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/05 15:47:44 by gboucett         ###   ########.fr       */
+/*   Updated: 2019/11/07 19:52:17 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	dsize;
+	size_t	i;
+	size_t	result;
 
-	dsize = ft_strlen(dst);
-	return (dsize + ft_strlcpy(dst + dsize, src, dstsize - dsize));
+	i = 0;
+	while (i < dstsize && dst[i])
+		i++;
+	result = i + ft_strlen(src);
+	if (dstsize <= i)
+		return (result);
+	ft_strlcpy(dst + i, src, dstsize - i);
+	return (result);
 }
