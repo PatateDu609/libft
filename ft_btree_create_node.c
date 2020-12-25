@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_btree_create_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 23:38:24 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/06 23:38:27 by gboucett         ###   ########.fr       */
+/*   Created: 2020/07/07 17:22:37 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/23 17:43:24 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+t_btree	*ft_btree_create_node(void *item)
 {
-	del(lst->content);
-	free(lst);
+	t_btree		*node;
+
+	if (!item)
+		return (NULL);
+	node = (t_btree *)ft_calloc(1, sizeof(t_btree));
+	if (!node)
+		return (NULL);
+	node->item = item;
+	return (node);
 }

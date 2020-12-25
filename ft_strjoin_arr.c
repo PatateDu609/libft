@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_prefix.c                               :+:      :+:    :+:   */
+/*   ft_strjoin_arr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 01:00:27 by gboucett          #+#    #+#             */
-/*   Updated: 2020/01/15 01:08:37 by gboucett         ###   ########.fr       */
+/*   Created: 2020/07/25 12:31:24 by gboucett          #+#    #+#             */
+/*   Updated: 2020/10/09 23:24:02 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void				btree_apply_prefix(t_btree *root, void (*f)(void *))
+char	*ft_strjoin_arr(char **arr, char sep)
 {
-	if (!root || !f)
-		return ;
-	f(root->item);
-	btree_apply_prefix(root->left, f);
-	btree_apply_prefix(root->right, f);
+	char	*result;
+	char	*tmp;
+	char	str_sep[2];
+
+	if (!arr || !*arr)
+		return (0);
+	result = ft_strdup(arr[0]);
+	arr++;
+	str_sep[0] = sep;
+	str_sep[1] = 0;
+	while (*arr)
+	{
+		tmp = result;
+		result = ft_strjoin(result, str_sep);
+		free(tmp);
+		tmp = result;
+		result = ft_strjoin(result, *arr);
+		free(tmp);
+		arr++;
+	}
+	return (result);
 }

@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_search_item.c                                :+:      :+:    :+:   */
+/*   ft_btree_apply_suffix.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 02:33:50 by gboucett          #+#    #+#             */
-/*   Updated: 2020/01/15 02:45:08 by gboucett         ###   ########.fr       */
+/*   Created: 2020/07/07 18:24:34 by gboucett          #+#    #+#             */
+/*   Updated: 2020/07/07 18:26:45 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*btree_search_item(t_btree *root, void *data_ref,
-		int (*cmp)(void *, void *))
+void	ft_btree_apply_suffix(t_btree *root, void (*f)(void *))
 {
-	if (!root)
-		return (NULL);
-	else if (cmp(root->item, data_ref) == 0)
-		return (root->item);
-	else if (cmp(root->item, data_ref) > 0)
-		return (btree_search_item(root->left, data_ref, cmp));
-	else if (cmp(root->item, data_ref) < 0)
-		return (btree_search_item(root->right, data_ref, cmp));
-	else
-		return (NULL);
+	if (!root || !f)
+		return ;
+	ft_btree_apply_suffix(root->left, f);
+	ft_btree_apply_suffix(root->right, f);
+	f(root->item);
 }

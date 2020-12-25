@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_suffix.c                               :+:      :+:    :+:   */
+/*   ft_assign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 01:00:27 by gboucett          #+#    #+#             */
-/*   Updated: 2020/01/15 03:07:09 by gboucett         ###   ########.fr       */
+/*   Created: 2020/12/24 22:24:20 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/24 22:25:31 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void				btree_apply_suffix(t_btree *root, void (*f)(void *))
+void	*ft_assign(void **var, void *valeur)
 {
-	if (!root || !f)
-		return ;
-	btree_apply_suffix(root->left, f);
-	btree_apply_suffix(root->right, f);
-	f(root->item);
+	*var = valeur;
+	return (*var);
 }

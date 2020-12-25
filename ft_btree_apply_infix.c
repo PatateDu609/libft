@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_btree_apply_infix.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gboucett <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 23:06:17 by gboucett          #+#    #+#             */
-/*   Updated: 2019/11/06 23:19:29 by gboucett         ###   ########.fr       */
+/*   Created: 2020/07/07 18:01:07 by gboucett          #+#    #+#             */
+/*   Updated: 2020/07/07 18:26:39 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void	ft_btree_apply_infix(t_btree *root, void (*f)(void *))
 {
-	new->next = *alst;
-	*alst = new;
+	if (!root || !f)
+		return ;
+	ft_btree_apply_infix(root->left, f);
+	f(root->item);
+	ft_btree_apply_infix(root->right, f);
 }

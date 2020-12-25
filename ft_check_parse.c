@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_level_count.c                                :+:      :+:    :+:   */
+/*   ft_check_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 02:45:52 by gboucett          #+#    #+#             */
-/*   Updated: 2020/01/15 03:01:02 by gboucett         ###   ########.fr       */
+/*   Created: 2019/11/17 14:20:51 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/23 17:45:00 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	btree_height(t_btree *root, int level)
+int	ft_isformat_or_flag(char c)
 {
-	if (root->left)
-		return (btree_height(root->left, level + 1));
-	else if (root->right)
-		return (btree_height(root->right, level + 1));
-	else
-		return (level);
+	return (ft_isformat(c) || ft_isflag(c));
 }
 
-int			btree_level_count(t_btree *root)
+int	ft_isformat(char c)
 {
-	if (!root)
-		return (-1);
-	else if (!root->left && !root->right)
-		return (0);
-	else
-		return (btree_height(root, 1));
+	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
+		|| c == 'u' || c == 'x' || c == 'X' || c == '%');
+}
+
+int	ft_isflag(char c)
+{
+	return (c == '.' || c == '-' || c == '*' || c == ' ' || ft_isdigit(c));
 }

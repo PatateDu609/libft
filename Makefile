@@ -1,82 +1,123 @@
-SRCS				=	ft_memset.c				\
-						ft_bzero.c				\
-						ft_memcpy.c				\
-						ft_memccpy.c			\
-						ft_memmove.c			\
-						ft_memchr.c				\
-						ft_memcmp.c				\
-						ft_strlen.c				\
-						ft_isalpha.c			\
-						ft_isdigit.c			\
-						ft_isalnum.c			\
-						ft_isascii.c			\
-						ft_isprint.c			\
-						ft_toupper.c			\
-						ft_tolower.c			\
-						ft_strchr.c				\
-						ft_strrchr.c			\
-						ft_strncmp.c			\
-						ft_strlcpy.c			\
-						ft_strlcat.c			\
-						ft_strnstr.c			\
-						ft_atoi.c				\
-						ft_calloc.c				\
-						ft_strdup.c				\
-						ft_substr.c				\
-						ft_strjoin.c			\
-						ft_strtrim.c			\
-						ft_split.c				\
-						ft_itoa.c				\
-						ft_strmapi.c			\
-						ft_putchar_fd.c			\
-						ft_putstr_fd.c			\
-						ft_putendl_fd.c			\
-						ft_putnbr_fd.c
+################################################################################
+#                               Name of the output                             #
+################################################################################
+NAME				=	libft.a
 
-BONUS				=	ft_lstnew_bonus.c		\
-						ft_lstadd_front_bonus.c	\
-						ft_lstsize_bonus.c		\
-						ft_lstlast_bonus.c		\
-						ft_lstadd_back_bonus.c	\
-						ft_lstdelone_bonus.c	\
-						ft_lstclear_bonus.c		\
-						ft_lstiter_bonus.c		\
-						ft_lstmap_bonus.c		\
-						btree_create_node.c		\
-						btree_apply_prefix.c	\
-						btree_apply_suffix.c	\
-						btree_apply_infix.c		\
-						btree_insert_data.c		\
-						btree_search_item.c		\
-						btree_level_count.c		\
-						btree_apply_by_level.c
+################################################################################
+#                          Paths of sources and objects                        #
+################################################################################
+PATH_INCLUDES		=	.
+PATH_SRCS			=	.
+PATH_OBJS			=	.
 
-BONUSOBJS		 	= ${BONUS:.c=.o}
-OBJS				= ${SRCS:.c=.o}
-GCC					= gcc
-CFLAGS				= -Wall -Wextra -Werror
-NAME				= libft.a
-RM					= rm -f
+################################################################################
+#                              Name of sources files                           #
+################################################################################
+SRCS_BASENAME		=	memset				\
+						bzero				\
+						memcpy				\
+						memccpy				\
+						memmove				\
+						memchr				\
+						memcmp				\
+						strlen				\
+						isalpha				\
+						isdigit				\
+						isalnum				\
+						isascii				\
+						isprint				\
+						toupper				\
+						tolower				\
+						strchr				\
+						strrchr				\
+						strcmp				\
+						strncmp				\
+						strlcpy				\
+						strlcat				\
+						strnstr				\
+						atoi				\
+						calloc				\
+						strdup				\
+						substr				\
+						strjoin				\
+						strjoin_arr			\
+						strtrim				\
+						split				\
+						itoa				\
+						strmapi				\
+						putchar_fd			\
+						putstr_fd			\
+						putendl_fd			\
+						putnbr_fd			\
+						lstnew_bonus		\
+						lstadd_front_bonus	\
+						lstsize_bonus		\
+						lstlast_bonus		\
+						lstfirst_bonus		\
+						lstadd_back_bonus	\
+						lstdelone_bonus		\
+						lstclear_bonus		\
+						lstiter_bonus		\
+						lstmap_bonus		\
+						btree_apply_suffix	\
+						btree_apply_infix	\
+						btree_apply_prefix	\
+						btree_create_node	\
+						ternary				\
+						assign				\
 
-.c.o:
-					${GCC} ${CFLAGS} -c $< -o ${<:.c=.o}
+GNL_SRCS			=	get_next_line		\
+						get_next_line_utils
 
-$(NAME):			${OBJS}
-					ar rc ${NAME} ${OBJS}
-					ranlib ${NAME}
+PRINTF_SRCS			=	putptr		\
+						printf		\
+						putchar		\
+						putstr		\
+						putunsigned	\
+						flags		\
+						puthexa		\
+						putnbr		\
+						check_parse	\
+						nbr_utils
 
-all:				${NAME}
+################################################################################
+#                             Commands and arguments                           #
+################################################################################
+RM					=	@rm -f
+GCC					=	@gcc
+CFLAGS				=	-Wall -Wextra -Werror -I$(PATH_INCLUDES) -g
+
+################################################################################
+#                         DO NOT MODIFY BELOW THIS POINT                       #
+################################################################################
+SRCS_EXT			=	$(addsuffix .c, $(SRCS_BASENAME))
+GNL_EXT				=	$(addsuffix .c, $(GNL_SRCS))
+PRINTF_EXT			=	$(addsuffix .c, $(PRINTF_SRCS))
+
+SRCS				=	$(addprefix $(PATH_SRCS)/ft_, $(SRCS_EXT))		\
+						$(addprefix $(PATH_SRCS)/ft_, $(PRINTF_EXT))	\
+						$(addprefix $(PATH_SRCS)/, $(GNL_EXT))
+
+OBJS				=	$(addprefix $(PATH_OBJS)/ft_, $(SRCS_EXT:.c=.o))	\
+						$(addprefix $(PATH_OBJS)/ft_, $(PRINTF_EXT:.c=.o))	\
+						$(addprefix $(PATH_OBJS)/, $(GNL_EXT:.c=.o))
+
+$(PATH_OBJS)/%.o:	$(PATH_SRCS)/%.c
+					$(GCC) $(CFLAGS) -D BUFFER_SIZE=32 -c $< -o $@
+
+$(NAME):			$(OBJS)
+					@ar rcs $(NAME) $(OBJS)
+
+all:				$(NAME)
 
 clean:
-					${RM} ${OBJS} ${BONUSOBJS}
+					$(RM) $(OBJS)
 
 fclean:				clean
-					${RM} ${NAME}
+					$(RM) $(NAME)
+
+bonus:				all
 
 re:					fclean all
 
-bonus:				${BONUSOBJS}
-					ar rc ${NAME} ${BONUSOBJS}
-					ranlib ${NAME}
-
-.PHONY:				all clean fclean re bonus
+.PHONY:				all clean fclean re
