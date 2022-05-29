@@ -69,17 +69,6 @@ SRCS_BASENAME		=	memset				\
 GNL_SRCS			=	get_next_line		\
 						get_next_line_utils
 
-PRINTF_SRCS			=	putptr		\
-						printf		\
-						putchar		\
-						putstr		\
-						putunsigned	\
-						flags		\
-						puthexa		\
-						putnbr		\
-						check_parse	\
-						nbr_utils
-
 UTILS_SRCS			=	get_option	\
 						parse_args	\
 						print_flags	\
@@ -92,6 +81,8 @@ UTILS_SRCS			=	get_option	\
 RM					=	@rm -f
 GCC					=	@gcc
 CFLAGS				=	-Wall -Wextra -Werror -I$(PATH_INCLUDES) -g -DBUFFER_SIZE=4096
+
+SYS_ENDIAN			=	1
 
 ################################################################################
 #                         DO NOT MODIFY BELOW THIS POINT                       #
@@ -110,6 +101,10 @@ OBJS				=	$(addprefix $(PATH_OBJS)/ft_, $(SRCS_EXT:.c=.o))	\
 						$(addprefix $(PATH_OBJS)/ft_, $(PRINTF_EXT:.c=.o))	\
 						$(addprefix $(PATH_OBJS)/, $(GNL_EXT:.c=.o))		\
 						$(addprefix $(PATH_SRCS)/, $(UTILS_EXT:.c=.o))		\
+
+ifeq ($(SYS_ENDIAN), 1)
+	CFLAGS			+=	-DSYS_ENDIAN
+endif
 
 $(PATH_OBJS)/%.o:	$(PATH_SRCS)/%.c
 					$(GCC) $(CFLAGS) -c $< -o $@

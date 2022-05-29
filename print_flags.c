@@ -1,5 +1,5 @@
 #include "ft_getopt.h"
-#include "utils.h"
+#include "libft.h"
 #include <stdio.h>
 
 void print_flags(uint8_t flags, t_option *options)
