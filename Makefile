@@ -80,12 +80,18 @@ PRINTF_SRCS			=	putptr		\
 						check_parse	\
 						nbr_utils
 
+UTILS_SRCS			=	get_option	\
+						parse_args	\
+						print_flags	\
+						random		\
+						endian
+
 ################################################################################
 #                             Commands and arguments                           #
 ################################################################################
 RM					=	@rm -f
 GCC					=	@gcc
-CFLAGS				=	-Wall -Wextra -Werror -I$(PATH_INCLUDES) -g
+CFLAGS				=	-Wall -Wextra -Werror -I$(PATH_INCLUDES) -g -DBUFFER_SIZE=4096
 
 ################################################################################
 #                         DO NOT MODIFY BELOW THIS POINT                       #
@@ -93,17 +99,20 @@ CFLAGS				=	-Wall -Wextra -Werror -I$(PATH_INCLUDES) -g
 SRCS_EXT			=	$(addsuffix .c, $(SRCS_BASENAME))
 GNL_EXT				=	$(addsuffix .c, $(GNL_SRCS))
 PRINTF_EXT			=	$(addsuffix .c, $(PRINTF_SRCS))
+UTILS_EXT			=	$(addsuffix .c, $(UTILS_SRCS))
 
 SRCS				=	$(addprefix $(PATH_SRCS)/ft_, $(SRCS_EXT))		\
 						$(addprefix $(PATH_SRCS)/ft_, $(PRINTF_EXT))	\
-						$(addprefix $(PATH_SRCS)/, $(GNL_EXT))
+						$(addprefix $(PATH_SRCS)/, $(GNL_EXT))			\
+						$(addprefix $(PATH_SRCS)/, $(UTILS_EXT))		\
 
 OBJS				=	$(addprefix $(PATH_OBJS)/ft_, $(SRCS_EXT:.c=.o))	\
 						$(addprefix $(PATH_OBJS)/ft_, $(PRINTF_EXT:.c=.o))	\
-						$(addprefix $(PATH_OBJS)/, $(GNL_EXT:.c=.o))
+						$(addprefix $(PATH_OBJS)/, $(GNL_EXT:.c=.o))		\
+						$(addprefix $(PATH_SRCS)/, $(UTILS_EXT:.c=.o))		\
 
 $(PATH_OBJS)/%.o:	$(PATH_SRCS)/%.c
-					$(GCC) $(CFLAGS) -D BUFFER_SIZE=32 -c $< -o $@
+					$(GCC) $(CFLAGS) -c $< -o $@
 
 $(NAME):			$(OBJS)
 					@ar rcs $(NAME) $(OBJS)
