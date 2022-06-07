@@ -24,13 +24,6 @@ typedef struct s_list
 	struct s_list *next;
 } t_list;
 
-typedef struct s_btree
-{
-	struct s_btree *left;
-	struct s_btree *right;
-	void *item;
-} t_btree;
-
 void *ft_memset(void *b, int c, size_t len);
 void ft_bzero(void *s, size_t len);
 void *ft_memcpy(void *dst, const void *src, size_t len);
@@ -65,6 +58,7 @@ char *ft_strtrim(const char *s1, const char *set);
 char **ft_split(const char *s, char c);
 char *ft_itoa(int n);
 char *ft_strmapi(const char *s, char (*f)(unsigned int, char));
+
 void ft_putchar_fd(char c, int fd);
 void ft_putstr_fd(char *s, int fd);
 void ft_putendl_fd(char *s, int fd);
@@ -80,18 +74,5 @@ void ft_lstdelone(t_list *lst, void (*del)(void *));
 void ft_lstclear(t_list **lst, void (*del)(void *));
 void ft_lstiter(t_list *lst, void (*f)(void *));
 t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
-t_btree *ft_btree_create_node(void *item);
-void ft_btree_apply_prefix(t_btree *root, void (*f)(void *));
-void ft_btree_apply_infix(t_btree *root, void (*f)(void *));
-void ft_btree_apply_suffix(t_btree *root, void (*f)(void *));
-
-void *ft_ternary(int test, void *a, void *b);
-int ft_ternaryi(int test, int a, int b);
-long ft_ternaryl(int test, long a, long b);
-unsigned long ft_ternaryul(int test, unsigned long a, unsigned long b);
-double ft_ternaryd(int test, double a, double b);
-
-void *ft_assign(void **var, void *valeur);
 
 #endif

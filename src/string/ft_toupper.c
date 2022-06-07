@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 23:25:35 by gboucett          #+#    #+#             */
-/*   Updated: 2020/12/24 22:21:38 by gboucett         ###   ########.fr       */
+/*   Created: 2019/11/04 22:37:53 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/24 22:26:51 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+int ft_toupper(int c)
 {
-	char	*strr;
-
-	strr = (char*)str + ft_strlen(str);
-	while (strr != str && *strr != (char)c)
-		strr--;
-	return ((char *)ft_ternary(*strr != (char)c, NULL, strr));
+	return ('a' <= c && c <= 'z' ? c - 32 : c);
 }

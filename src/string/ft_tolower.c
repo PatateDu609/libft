@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_tolower(int c)
+int ft_tolower(int c)
 {
-	return (ft_ternaryi('A' <= c && c <= 'Z', c + 32, c));
+	return ('A' <= c && c <= 'Z' ? c + 32 : c);
 }

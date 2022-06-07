@@ -1,125 +1,85 @@
-################################################################################
-#                               Name of the output                             #
-################################################################################
-NAME				=	libft.a
+NAME		:=	libft.a
 
-################################################################################
-#                          Paths of sources and objects                        #
-################################################################################
-PATH_INCLUDES		=	.
-PATH_SRCS			=	.
-PATH_OBJS			=	.
+PATH_SRC	:=	./src
+PATH_OBJ	:=	./obj
+PATH_INC	:=	./include
 
-################################################################################
-#                              Name of sources files                           #
-################################################################################
-SRCS_BASENAME		=	memset				\
-						bzero				\
-						memcpy				\
-						memccpy				\
-						memmove				\
-						memchr				\
-						memcmp				\
-						strlen				\
-						isalpha				\
-						isdigit				\
-						isalnum				\
-						isascii				\
-						isprint				\
-						toupper				\
-						tolower				\
-						strchr				\
-						strrchr				\
-						strcmp				\
-						strncmp				\
-						strlcpy				\
-						strlcat				\
-						strnstr				\
-						atoi				\
-						calloc				\
-						strdup				\
-						substr				\
-						strjoin				\
-						strjoin_arr			\
-						strtrim				\
-						split				\
-						itoa				\
-						strmapi				\
-						putchar_fd			\
-						putstr_fd			\
-						putnbr_fd			\
-						lstnew_bonus		\
-						lstadd_front_bonus	\
-						lstsize_bonus		\
-						lstlast_bonus		\
-						lstfirst_bonus		\
-						lstadd_back_bonus	\
-						lstdelone_bonus		\
-						lstclear_bonus		\
-						lstiter_bonus		\
-						lstmap_bonus		\
-						btree_apply_suffix	\
-						btree_apply_infix	\
-						btree_apply_prefix	\
-						btree_create_node	\
-						ternary				\
-						assign				\
+CC			:=	gcc
+CFLAGS		:=	-Wall -Wextra -Werror -O2 -I$(PATH_INC)
+LDFLAGS		:=
 
-GNL_SRCS			=	get_next_line		\
-						get_next_line_utils
+SRC			:=	lst/ft_lstfirst.c				\
+				lst/ft_lstadd_front.c			\
+				lst/ft_lstsize.c				\
+				lst/ft_lstadd_back.c			\
+				lst/ft_lstlast.c				\
+				lst/ft_lstnew.c					\
+				lst/ft_lstiter.c				\
+				lst/ft_lstmap.c					\
+				lst/ft_lstdelone.c				\
+				lst/ft_lstclear.c				\
+				getopt/parse_args.c				\
+				getopt/get_option.c				\
+				getopt/print_flags.c			\
+				string/ft_strrchr.c				\
+				string/ft_strnstr.c				\
+				string/ft_strchr.c				\
+				string/ft_toupper.c				\
+				string/ft_strcmp.c				\
+				string/ft_strlcpy.c				\
+				string/ft_strtrim.c				\
+				string/get_next_line.c			\
+				string/ft_strlen.c				\
+				string/ft_tolower.c				\
+				string/ft_strjoin_arr.c			\
+				string/ft_substr.c				\
+				string/ft_itoa.c				\
+				string/ft_split.c				\
+				string/get_next_line_utils.c	\
+				string/ft_strdup.c				\
+				string/ft_strjoin.c				\
+				string/ft_strncmp.c				\
+				string/ft_strmapi.c				\
+				string/ft_strlcat.c				\
+				memory/ft_memmove.c				\
+				memory/ft_memccpy.c				\
+				memory/ft_calloc.c				\
+				memory/ft_memchr.c				\
+				memory/ft_memcmp.c				\
+				memory/ft_memcpy.c				\
+				memory/ft_memset.c				\
+				memory/ft_bzero.c				\
+				utils/ft_isalnum.c				\
+				utils/ft_atoi.c					\
+				utils/ft_isdigit.c				\
+				utils/ft_isalpha.c				\
+				utils/random.c					\
+				utils/ft_isascii.c				\
+				utils/endian.c					\
+				utils/ft_isprint.c				\
+				print/ft_putchar_fd.c			\
+				print/ft_putnbr_fd.c			\
+				print/ft_putstr_fd.c			\
 
-UTILS_SRCS			=	get_option	\
-						parse_args	\
-						print_flags	\
-						random		\
-						endian
+OBJ			:=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))
+SRC 		:=	$(addprefix $(PATH_SRC)/, $(SRC))
 
-################################################################################
-#                             Commands and arguments                           #
-################################################################################
-RM					=	@rm -f
-GCC					=	@gcc
-CFLAGS				=	-Wall -Wextra -Werror -I$(PATH_INCLUDES) -g -DBUFFER_SIZE=4096
+$(PATH_OBJ)/%.o:	$(PATH_SRC)/%.c
+	@mkdir -p $(dir $@)
+	@/bin/echo -e "  Compiling   \033[31m$(notdir $<)\033[0m"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-SYS_ENDIAN			=	1
+all: 				$(NAME)
 
-################################################################################
-#                         DO NOT MODIFY BELOW THIS POINT                       #
-################################################################################
-SRCS_EXT			=	$(addsuffix .c, $(SRCS_BASENAME))
-GNL_EXT				=	$(addsuffix .c, $(GNL_SRCS))
-PRINTF_EXT			=	$(addsuffix .c, $(PRINTF_SRCS))
-UTILS_EXT			=	$(addsuffix .c, $(UTILS_SRCS))
-
-SRCS				=	$(addprefix $(PATH_SRCS)/ft_, $(SRCS_EXT))		\
-						$(addprefix $(PATH_SRCS)/ft_, $(PRINTF_EXT))	\
-						$(addprefix $(PATH_SRCS)/, $(GNL_EXT))			\
-						$(addprefix $(PATH_SRCS)/, $(UTILS_EXT))		\
-
-OBJS				=	$(addprefix $(PATH_OBJS)/ft_, $(SRCS_EXT:.c=.o))	\
-						$(addprefix $(PATH_OBJS)/ft_, $(PRINTF_EXT:.c=.o))	\
-						$(addprefix $(PATH_OBJS)/, $(GNL_EXT:.c=.o))		\
-						$(addprefix $(PATH_SRCS)/, $(UTILS_EXT:.c=.o))		\
-
-ifeq ($(SYS_ENDIAN), 1)
-	CFLAGS			+=	-DSYS_ENDIAN
-endif
-
-$(PATH_OBJS)/%.o:	$(PATH_SRCS)/%.c
-					$(GCC) $(CFLAGS) -c $< -o $@
-
-$(NAME):			$(OBJS)
-					@ar rcs $(NAME) $(OBJS)
-
-all:				$(NAME)
+$(NAME): 			$(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 
 clean:
-					$(RM) $(OBJS)
+	@rm -f $(OBJ)
 
 fclean:				clean
-					$(RM) $(NAME)
-
-bonus:				all
+	@rm -f $(NAME)
+	@rm -r $(PATH_OBJ)
 
 re:					fclean all
 

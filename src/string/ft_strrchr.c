@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_parse.c                                   :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/17 14:20:51 by gboucett          #+#    #+#             */
-/*   Updated: 2020/12/23 17:45:00 by gboucett         ###   ########.fr       */
+/*   Created: 2019/11/04 23:25:35 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/24 22:21:38 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_isformat_or_flag(char c)
+char *ft_strrchr(const char *str, int c)
 {
-	return (ft_isformat(c) || ft_isflag(c));
-}
+	char *strr;
 
-int	ft_isformat(char c)
-{
-	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
-		|| c == 'u' || c == 'x' || c == 'X' || c == '%');
-}
-
-int	ft_isflag(char c)
-{
-	return (c == '.' || c == '-' || c == '*' || c == ' ' || ft_isdigit(c));
+	strr = (char *)str + ft_strlen(str);
+	while (strr != str && *strr != (char)c)
+		strr--;
+	return (*strr != (char)c ? NULL : strr);
 }

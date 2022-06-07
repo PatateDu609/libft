@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static size_t	ft_size(unsigned int n, size_t size)
+static size_t ft_size(unsigned int n, size_t size)
 {
 	if (n == 0 && !size)
 		return (1);
@@ -21,14 +21,14 @@ static size_t	ft_size(unsigned int n, size_t size)
 	return (ft_size(n / 10, size + 1));
 }
 
-char	*ft_itoa(int n)
+char *ft_itoa(int n)
 {
-	char			*result;
-	size_t			size;
-	unsigned int	nbr;
+	char *result;
+	size_t size;
+	unsigned int nbr;
 
-	nbr = ft_ternaryi(n < 0, -n, n);
-	size = ft_size(nbr, ft_ternaryi(n < 0, 1, 0));
+	nbr = n < 0 ? -n : n;
+	size = ft_size(nbr, n < 0 ? 1 : 0);
 	result = (char *)malloc(size + 1);
 	if (!result)
 		return (NULL);

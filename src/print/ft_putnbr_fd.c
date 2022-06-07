@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 22:37:53 by gboucett          #+#    #+#             */
-/*   Updated: 2020/12/24 22:26:51 by gboucett         ###   ########.fr       */
+/*   Created: 2019/11/06 21:48:57 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/24 21:31:32 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+void ft_putnbr_fd(int n, int fd)
 {
-	return (ft_ternaryi('a' <= c && c <= 'z', c - 32, c));
+	unsigned int nbr;
+
+	nbr = n < 0 ? -n : n;
+	if (n < 0)
+		write(fd, "-", 1);
+	if (nbr / 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd(nbr % 10 + '0', fd);
 }
