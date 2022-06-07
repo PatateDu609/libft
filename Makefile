@@ -47,7 +47,6 @@ SRCS_BASENAME		=	memset				\
 						strmapi				\
 						putchar_fd			\
 						putstr_fd			\
-						putendl_fd			\
 						putnbr_fd			\
 						lstnew_bonus		\
 						lstadd_front_bonus	\
