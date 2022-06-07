@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_btree_apply_prefix.c                            :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/07 17:28:37 by gboucett          #+#    #+#             */
-/*   Updated: 2020/07/07 18:49:33 by gboucett         ###   ########.fr       */
+/*   Created: 2019/11/06 22:13:52 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/25 12:16:07 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-void	ft_btree_apply_prefix(t_btree *root, void (*f)(void *))
+t_list *ft_lstnew(void *content)
 {
-	if (!root || !f)
-		return ;
-	f(root->item);
-	ft_btree_apply_prefix(root->left, f);
-	ft_btree_apply_prefix(root->right, f);
+	t_list *new;
+
+	if (!(new = malloc(sizeof(t_list))))
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	new->previous = NULL;
+	return (new);
 }

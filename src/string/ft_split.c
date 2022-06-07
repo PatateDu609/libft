@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-static int	cs(char const *s, char c)
+static int cs(char const *s, char c)
 {
-	int		strings;
-	size_t	i;
+	int strings;
+	size_t i;
 
 	i = 0;
 	strings = 0;
@@ -34,9 +34,9 @@ static int	cs(char const *s, char c)
 	return (strings);
 }
 
-static size_t	to_sep(char const *s, char c)
+static size_t to_sep(char const *s, char c)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	while (s[i] != c && s[i])
@@ -44,9 +44,9 @@ static size_t	to_sep(char const *s, char c)
 	return (i);
 }
 
-static void	*free_result(char **result)
+static void *free_result(char **result)
 {
-	char	**saved;
+	char **saved;
 
 	saved = result;
 	while (*result)
@@ -58,21 +58,20 @@ static void	*free_result(char **result)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char **ft_split(char const *s, char c)
 {
-	char	**res;
-	size_t	nbs[3];
+	char **res;
+	size_t nbs[3];
 
 	nbs[0] = 0;
 	nbs[1] = 0;
-	if (!s || !ft_assign((void *)&res, malloc(sizeof(char *) * (cs(s, c) + 1))))
+	if (!s || !(res = malloc(sizeof(char *) * (cs(s, c) + 1))))
 		return (NULL);
 	while (s[nbs[0]])
 	{
 		if (s[nbs[0]] != c && s[nbs[0]])
 		{
-			if (!ft_assign((void **)&res[nbs[1]], malloc(sizeof(char *)
-							* (to_sep(&s[nbs[0]], c) + 1))))
+			if (!(res[nbs[1]] = malloc(sizeof(char *) * (to_sep(&s[nbs[0]], c) + 1))))
 				return (free_result(res));
 			nbs[2] = 0;
 			while (s[nbs[0]] != c && s[nbs[0]])

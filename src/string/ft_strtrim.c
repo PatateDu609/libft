@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-static unsigned int	ft_trimedlen(const char *s1, const char *set)
+static unsigned int ft_trimedlen(const char *s1, const char *set)
 {
-	unsigned int	size;
-	const char		*s;
+	unsigned int size;
+	const char *s;
 
 	size = ft_strlen(s1);
 	s = s1;
@@ -35,18 +35,18 @@ static unsigned int	ft_trimedlen(const char *s1, const char *set)
 	return (size + 1);
 }
 
-char	*ft_strtrim(const char *s1, const char *set)
+char *ft_strtrim(const char *s1, const char *set)
 {
-	unsigned int	size;
-	char			*result;
-	unsigned int	i;
+	unsigned int size;
+	char *result;
+	unsigned int i;
 
 	if (!s1)
 		return (NULL);
 	if (!set || !*set)
 		return (ft_strdup(s1));
 	size = ft_trimedlen(s1, set);
-	if (!ft_assign((void **)&result, (char *)malloc(size + 1)))
+	if (!(result = (char *)malloc(size + 1)))
 		return (NULL);
 	while (*s1 && ft_strchr(set, *s1))
 		s1++;

@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/06 21:48:57 by gboucett          #+#    #+#             */
-/*   Updated: 2020/12/24 21:31:32 by gboucett         ###   ########.fr       */
+/*   Created: 2019/11/05 16:58:07 by gboucett          #+#    #+#             */
+/*   Updated: 2020/12/24 22:42:04 by gboucett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+char *ft_strjoin(const char *s1, const char *s2)
 {
-	unsigned int	nbr;
+	size_t size;
+	char *result;
+	char *s;
 
-	nbr = ft_ternaryi(n < 0, -n, n);
-	if (n < 0)
-		write(fd, "-", 1);
-	if (nbr / 10)
-		ft_putnbr_fd(nbr / 10, fd);
-	ft_putchar_fd(nbr % 10 + '0', fd);
+	size = 0;
+	if (s1)
+		size += ft_strlen(s1);
+	if (s2)
+		size += ft_strlen(s2);
+	if (!(result = (char *)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	s = result;
+	if (s1)
+		while (*s1)
+			*s++ = *s1++;
+	if (s2)
+		while (*s2)
+			*s++ = *s2++;
+	*s = 0;
+	return (result);
 }
