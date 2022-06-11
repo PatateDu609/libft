@@ -83,7 +83,7 @@ clean:
 
 fclean:				clean
 	@rm -f $(NAME)
-	@rm -r $(PATH_OBJ)
+	@rm -rf $(PATH_OBJ)
 
 re:					fclean all
 
