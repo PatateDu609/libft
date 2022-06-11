@@ -5,8 +5,8 @@ PATH_OBJ	:=	./obj
 PATH_INC	:=	./include
 
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror -O2 -I$(PATH_INC)
-LDFLAGS		:=
+CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -O0
+LDFLAGS		:=	-g
 
 SRC			:=	lst/ft_lstfirst.c				\
 				lst/ft_lstadd_front.c			\
@@ -34,6 +34,7 @@ SRC			:=	lst/ft_lstfirst.c				\
 				string/ft_strjoin_arr.c			\
 				string/ft_substr.c				\
 				string/ft_itoa.c				\
+				string/ft_itoa_base.c			\
 				string/ft_split.c				\
 				string/get_next_line_utils.c	\
 				string/ft_strdup.c				\
@@ -60,6 +61,11 @@ SRC			:=	lst/ft_lstfirst.c				\
 				print/ft_putchar_fd.c			\
 				print/ft_putnbr_fd.c			\
 				print/ft_putstr_fd.c			\
+				vlq/vlq_add.c					\
+				vlq/vlq_init.c					\
+				vlq/vlq_str.c					\
+				vlq/internal/vlq_bitwise.c		\
+				vlq/internal/vlq_size.c			\
 
 OBJ			:=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))
 SRC 		:=	$(addprefix $(PATH_SRC)/, $(SRC))

@@ -1,20 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gboucett <gboucett@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 11:49:32 by gboucett          #+#    #+#             */
-/*   Updated: 2022/05/29 17:34:12 by gboucett         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef LIBFT_H
 #define LIBFT_H
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <inttypes.h>
+
 #include "get_next_line.h"
 
 typedef struct s_list
@@ -57,6 +47,8 @@ char *ft_strjoin_arr(char **arr, char sep);
 char *ft_strtrim(const char *s1, const char *set);
 char **ft_split(const char *s, char c);
 char *ft_itoa(int n);
+char *ft_ltoa_base(int64_t n, int base);
+char *ft_ultoa_base(uint64_t n, int base);
 char *ft_strmapi(const char *s, char (*f)(unsigned int, char));
 
 void ft_putchar_fd(char c, int fd);
