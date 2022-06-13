@@ -7,12 +7,26 @@
 
 #include "get_next_line.h"
 
+#ifndef BUFF_SIZE
+#define BUFF_SIZE 4096
+#endif
+
+#define BASE2 2
+#define BASE8 8
+#define BASE10 10
+#define BASE16 16
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
 typedef struct s_list
 {
 	struct s_list *previous;
 	void *content;
 	struct s_list *next;
 } t_list;
+
+#define __unreachable __builtin_unreachable();
 
 void *ft_memset(void *b, int c, size_t len);
 void ft_bzero(void *s, size_t len);
