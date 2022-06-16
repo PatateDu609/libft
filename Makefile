@@ -64,6 +64,10 @@ SRC			:=	lst/ft_lstfirst.c				\
 				print/ft_putchar_fd.c			\
 				print/ft_putnbr_fd.c			\
 				print/ft_putstr_fd.c			\
+				stream/stream_close.c			\
+				stream/stream_open.c			\
+				stream/stream_read.c			\
+				stream/stream_write.c			\
 
 OBJ			:=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))
 SRC 		:=	$(addprefix $(PATH_SRC)/, $(SRC))
