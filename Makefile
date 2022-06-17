@@ -52,6 +52,8 @@ SRC			:=	lst/ft_lstfirst.c				\
 				memory/ft_memcmp.c				\
 				memory/ft_memcpy.c				\
 				memory/ft_memset.c				\
+				memory/ft_memdup.c				\
+				memory/ft_memjoin.c				\
 				memory/ft_bzero.c				\
 				utils/ft_isalnum.c				\
 				utils/ft_atoi.c					\
