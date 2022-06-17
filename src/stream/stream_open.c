@@ -81,3 +81,30 @@ ft_stream *ft_sopen(const char *path, const char *mode)
 
 	return stream;
 }
+
+ft_stream *ft_sopen_fd(int fd)
+{
+	ft_stream *stream = malloc(sizeof *stream);
+
+	if (stream == NULL)
+		return NULL;
+
+	stream->fd = fd;
+	stream->buffer = NULL;
+	stream->type = FT_STREAM_TYPE_FILE;
+	stream->size = 0;
+	stream->pos = 0;
+	stream->filesize = 0;
+	stream->max = 0; // buffer is empty at the beginning
+	stream->path = NULL;
+	stream->mode_str = NULL;
+
+	if (__setup_buffer(stream))
+	{
+		close(stream->fd);
+		free(stream);
+		return NULL;
+	}
+
+	return stream;
+}

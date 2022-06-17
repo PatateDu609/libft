@@ -33,6 +33,7 @@ typedef struct s_ft_stream
 } ft_stream;
 
 ft_stream *ft_sopen(const char *path, const char *mode);
+ft_stream *ft_sopen_fd(int fd);
 void ft_sclose(ft_stream *stream);
 
 ssize_t ft_sread(ft_stream *stream, void *buffer, size_t size);
