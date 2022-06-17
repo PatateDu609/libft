@@ -35,6 +35,9 @@ void *ft_memccpy(void *dst, const void *src, int c, size_t len);
 void *ft_memmove(void *dst, const void *src, size_t len);
 void *ft_memchr(const void *s, int c, size_t len);
 int ft_memcmp(const void *s1, const void *s2, size_t len);
+uint8_t *ft_memdup(uint8_t *src, size_t len);
+uint8_t *ft_memjoin(uint8_t *src1, size_t len1, uint8_t *src2, size_t len2);
+
 size_t ft_strlen(const char *str);
 int ft_isalpha(int c);
 int ft_isdigit(int c);
