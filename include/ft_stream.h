@@ -26,8 +26,8 @@ typedef struct s_ft_stream
 	size_t pos;	  // current position in the buffer
 	size_t max;	  // real size of buffer (for file streams)
 
-	int32_t fd;		 // file descriptor
-	size_t filesize; // file size
+	int32_t fd;			 // file descriptor
+	__int128_t filesize; // file size
 	const char *path;
 	const char *mode_str;
 } ft_stream;
