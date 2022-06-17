@@ -46,7 +46,7 @@ ssize_t __sread_file(ft_stream *stream, void *buffer, size_t size)
 		stream->max = max;
 	}
 
-	return (__sread_buffer(stream, buffer, size, (size_t)max < size));
+	return (__sread_buffer(stream, buffer, size, (size_t)max >= size));
 }
 
 ssize_t ft_sread(ft_stream *stream, void *buffer, size_t size)
