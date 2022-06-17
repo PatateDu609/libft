@@ -39,6 +39,7 @@ ssize_t __sread_file(ft_stream *stream, void *buffer, size_t size)
 	ssize_t max = read(stream->fd, stream->buffer, stream->size);
 	if (max < 0)
 		return (-1);
+	stream->filesize += max; // update file size
 	if (max > 0)
 	{
 		stream->pos = 0;
