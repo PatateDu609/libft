@@ -20,9 +20,10 @@ static ssize_t __sread_buffer(ft_stream *stream, void *buffer, size_t size, ssiz
 	if (n == size) // we have read just what we asked for
 		return (n);
 
-	if (ret)
-		return (__sread_file(stream, buffer + n, size - n));
-	return (n);
+	ssize_t b_read = __sread_file(stream, buffer + n, size - n);
+	if (b_read == -1)
+		return (-1);
+	return (b_read == 0 ? n : n + b_read);
 }
 
 /*
@@ -45,6 +46,8 @@ ssize_t __sread_file(ft_stream *stream, void *buffer, size_t size)
 		stream->pos = 0;
 		stream->max = max;
 	}
+	if (max == 0)
+		return (0);
 	return (__sread_buffer(stream, buffer, size, max && ((size_t)max >= size)));
 }
 
