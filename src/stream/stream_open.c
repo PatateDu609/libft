@@ -61,6 +61,7 @@ ft_stream *ft_sopen(const char *path, const char *mode)
 	stream->type = FT_STREAM_TYPE_FILE;
 	stream->size = 0;
 	stream->pos = 0;
+	stream->filesize = 0;
 	stream->max = 0; // buffer is empty at the beginning
 	stream->path = ft_strdup(path);
 	stream->mode_str = mode;
