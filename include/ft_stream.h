@@ -2,6 +2,7 @@
 #define FT_STREAM_H
 
 #include <stdlib.h>
+#include <unistd.h>
 
 enum e_ft_stream_stream_type
 {
