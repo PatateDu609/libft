@@ -66,8 +66,16 @@ ft_stream *ft_sopen(const char *path, const char *mode)
 	stream->path = ft_strdup(path);
 	stream->mode_str = mode;
 
-	if (__sopen(stream)) // TODO: check return value
+	int res = __sopen(stream);
+	if (res == -2)
 	{
+		free(stream);
+		return NULL;
+	}
+	if (res == -1)
+	{
+		fprintf(stderr, "ft_sopen: error opening file %s\n", path);
+		free(stream->path);
 		free(stream);
 		return NULL;
 	}
