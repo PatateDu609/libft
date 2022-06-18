@@ -75,7 +75,7 @@ ft_stream *ft_sopen(const char *path, const char *mode)
 	if (res == -1)
 	{
 		fprintf(stderr, "ft_sopen: error opening file %s\n", path);
-		free(stream->path);
+		free((char *)stream->path);
 		free(stream);
 		return NULL;
 	}
