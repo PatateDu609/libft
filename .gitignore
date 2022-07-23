@@ -1,6 +1,7 @@
 a.out
 **.a
 main*.c
-**.o
+obj
+objs
 .vscode
 test*
