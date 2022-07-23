@@ -1,10 +1,15 @@
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+
 #include "ft_getopt.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
-static int8_t manage_short_opt(t_option *opts, int nb_opts, char *arg, char *arg1)
+static int64_t manage_short_opt(t_option *opts, int nb_opts, char *arg, char *arg1)
 {
-	int8_t flags = 0;
+	int64_t flags = 0;
 
 	for (int i = 1; arg[i]; i++)
 	{
@@ -17,9 +22,9 @@ static int8_t manage_short_opt(t_option *opts, int nb_opts, char *arg, char *arg
 			if (opts[j].short_name == arg[i] && opts[j].need_value)
 			{
 				if (arg[i - 1] != '-' && arg[i + 1])
-					dprintf(2, "ft_traceroute: -%c: Options that need a value are unmixable.\n", opts[j].short_name);
+					dprintf(2, "%s: -%c: Options that need a value aren't mixable.\n", program_invocation_short_name, opts[j].short_name);
 				else if ((!arg1 || !opts[j].check(arg1)))
-					dprintf(2, "ft_traceroute: -%c: %s\n", opts[j].short_name, opts[j].arg_help);
+					dprintf(2, "%s: -%c: %s\n", program_invocation_short_name, opts[j].short_name, opts[j].arg_help);
 				if ((arg[i - 1] != '-' && arg[i + 1]) ||
 					(!arg1 || !opts[j].check(arg1)))
 					exit(1);
@@ -36,15 +41,18 @@ static int8_t manage_short_opt(t_option *opts, int nb_opts, char *arg, char *arg
 	return flags;
 }
 
-static int8_t manage_long_opt(t_option *opts, int nb_opts, char *arg)
+// TODO: Add support for long options with value (must be an equal...).
+static int64_t manage_long_opt(t_option *opts, int nb_opts, char *arg)
 {
 	for (int i = 0; i < nb_opts; i++)
+	{
 		if (opts[i].name && ft_strcmp(opts[i].name, arg + 2) == 0)
 			return opts[i].flag;
+	}
 	return -1;
 }
 
-int8_t get_option(t_option *options, int nb_opts, char *arg, char *arg1)
+int64_t get_option(t_option *options, int nb_opts, char *arg, char *arg1)
 {
 	if (arg[0] == '-' && arg[1] == '-')
 		return manage_long_opt(options, nb_opts, arg);

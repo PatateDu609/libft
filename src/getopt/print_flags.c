@@ -2,7 +2,7 @@
 #include "libft.h"
 #include <stdio.h>
 
-void print_flags(uint8_t flags, t_option *options)
+void print_flags(uint64_t flags, t_option *options)
 {
 	int i;
 

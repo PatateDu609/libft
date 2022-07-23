@@ -19,19 +19,21 @@ int check_opt_value(char *arg, t_option *option, int nb_opt)
 	return -1;
 }
 
-static int get_size(int ac, char **av, int *s, t_option *opt, int nb_opt)
+static int get_size(int ac, char **av, int *first_arg, t_option *opt, int nb_opt)
 {
 	int size = 0;
 
 	for (int i = 1; i < ac; i++)
 	{
-		if (!*s && av[i][0] == '-' && av[i][1] == '-' && av[i][2] == 0)
+		if (!*first_arg && av[i][0] == '-' && av[i][1] == '-' && av[i][2] == 0)
 		{
-			*s = i + 1;
+			*first_arg = i + 1;
 			continue;
 		}
-		else if (!*s && av[i][0] == '-' && av[i][1] != '-')
+		else if (!*first_arg && av[i][0] == '-')
 		{
+			if (av[i][1] == '-')
+				continue;
 			int opt_value = check_opt_value(av[i], opt, nb_opt);
 			if (opt && opt_value == 0)
 				continue;
@@ -40,12 +42,12 @@ static int get_size(int ac, char **av, int *s, t_option *opt, int nb_opt)
 				i++;
 				continue;
 			}
-			*s = -1;
+			*first_arg = -1;
 			return -1;
 		}
-		else if (!*s)
-			*s = i;
-		if (!*s)
+		else if (!*first_arg)
+			*first_arg = i;
+		if (!*first_arg)
 			continue;
 		size++;
 	}
@@ -54,10 +56,10 @@ static int get_size(int ac, char **av, int *s, t_option *opt, int nb_opt)
 
 static uint8_t extract_args(int ac, char **av, t_args *args)
 {
-	int s = 0;
-	int size = get_size(ac, av, &s, args->options, args->nb_opt);
+	int first_arg = 0;
+	int size = get_size(ac, av, &first_arg, args->options, args->nb_opt);
 
-	if (s == -1)
+	if (first_arg == -1)
 	{
 		print_help(args);
 		return 0;
@@ -69,8 +71,8 @@ static uint8_t extract_args(int ac, char **av, t_args *args)
 
 	if (size == 0)
 		return 1;
-	for (int i = s; i < ac; i++)
-		args->args[i - s] = av[i];
+	for (int i = first_arg; i < ac; i++)
+		args->args[i - first_arg] = av[i];
 	return (1);
 }
 
@@ -80,7 +82,7 @@ static uint8_t extract_flags(int ac, char **av, t_args *args)
 		return 1;
 	for (int i = 1; i < ac; i++)
 	{
-		int8_t opt = get_option(args->options, args->nb_opt, av[i], i + 1 < ac ? av[i + 1] : NULL);
+		int64_t opt = get_option(args->options, args->nb_opt, av[i], i + 1 < ac ? av[i + 1] : NULL);
 		if (opt == -1)
 		{
 			print_help(args);
@@ -138,6 +140,8 @@ t_args *parse_args(int ac, char **av)
 
 	if (!(args = (t_args *)malloc(sizeof(t_args))))
 		return NULL;
+
+	ft_memset(args, 0, sizeof(t_args));
 	args->options = init_options(&args->nb_opt);
 	if (check_options(args))
 		exit(1);

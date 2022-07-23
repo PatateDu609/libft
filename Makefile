@@ -1,11 +1,11 @@
 NAME		:=	libft.a
 
-PATH_SRC	:=	./src
-PATH_OBJ	:=	./obj
-PATH_INC	:=	./include
+PATH_SRC	:=	src
+PATH_OBJ	:=	obj
+PATH_INC	:=	include
 
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -O0
+CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD
 LDFLAGS		:=	-g
 
 SRC			:=	lst/ft_lstfirst.c				\
@@ -72,6 +72,7 @@ SRC			:=	lst/ft_lstfirst.c				\
 				stream/stream_write.c			\
 
 OBJ			:=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))
+DEP			:=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.d))
 SRC 		:=	$(addprefix $(PATH_SRC)/, $(SRC))
 
 $(PATH_OBJ)/%.o:	$(PATH_SRC)/%.c
@@ -79,7 +80,10 @@ $(PATH_OBJ)/%.o:	$(PATH_SRC)/%.c
 	@/bin/echo -e "  Compiling   \033[31m$(notdir $<)\033[0m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+
 all: 				$(NAME)
+
+-include $(DEP)
 
 $(NAME): 			$(OBJ)
 	@ar rcs $(NAME) $(OBJ)
