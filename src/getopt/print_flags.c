@@ -10,7 +10,11 @@ void print_flags(uint64_t flags, t_option *options)
 	while (options && options[i].name)
 	{
 		if (flags & options[i].flag)
+		{
 			printf(" - %s - %s - %c\n", options[i].name, options[i].description, options[i].short_name);
+			if (options[i].need_value)
+				printf("\tActual value : %s\n", options[i].value);
+		}
 		i++;
 	}
 }
