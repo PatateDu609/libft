@@ -5,7 +5,7 @@ PATH_OBJ	:=	obj
 PATH_INC	:=	include
 
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD
+CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD -O2
 LDFLAGS		:=	-g
 
 SRC			:=	lst/ft_lstfirst.c				\
@@ -39,6 +39,7 @@ SRC			:=	lst/ft_lstfirst.c				\
 				string/ft_split.c				\
 				string/get_next_line_utils.c	\
 				string/ft_strdup.c				\
+				string/ft_strndup.c				\
 				string/ft_strjoin.c				\
 				string/ft_strncmp.c				\
 				string/ft_strmapi.c				\
