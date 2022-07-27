@@ -2,6 +2,7 @@
 
 #ifdef __LP64__
 
+__attribute__((pure))
 size_t	ft_strlen(const char *str)
 {
 	if (!str)
