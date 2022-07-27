@@ -5,7 +5,7 @@ PATH_OBJ	:=	obj
 PATH_INC	:=	include
 
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD -O2
+CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD -O3 -fstack-protector
 LDFLAGS		:=	-g
 
 SRC			:=	lst/ft_lstfirst.c				\
