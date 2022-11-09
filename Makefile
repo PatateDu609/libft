@@ -4,6 +4,19 @@ PATH_SRC	:=	src
 PATH_OBJ	:=	obj
 PATH_INC	:=	include
 
+ifndef $(ECHO)
+ECHO			:=	echo
+
+UNAME_S			:= $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+ECHO			:=	/bin/echo -e
+endif
+ifeq ($(UNAME_S),Darwin)
+ECHO			:=	echo
+endif
+undefine UNAME_S
+endif
+
 CC			:=	gcc
 CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD -O3 -fstack-protector-all
 LDFLAGS		:=	-g
@@ -78,7 +91,7 @@ SRC 		:=	$(addprefix $(PATH_SRC)/, $(SRC))
 
 $(PATH_OBJ)/%.o:	$(PATH_SRC)/%.c
 	@mkdir -p $(dir $@)
-	@/bin/echo -e "  Compiling   \033[31m$(notdir $<)\033[0m"
+	@$(ECHO) "  Compiling   \033[31m$(notdir $<)\033[0m"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 

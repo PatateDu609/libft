@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
+#ifndef __GLIBC__ // Work only on OSX and BSD systems
+#define program_invocation_short_name getprogname()
+#endif
+
 #include "libft.h"
 
 typedef struct s_option
