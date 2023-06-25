@@ -18,7 +18,7 @@ undefine UNAME_S
 endif
 
 CC			:=	gcc
-CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD -O3 -fstack-protector-all
+CFLAGS		:=	-Wall -Wextra -Werror -I$(PATH_INC) -g3 -ggdb3 -MMD -O3 -fstack-protector-all -fno-omit-frame-pointer
 LDFLAGS		:=	-g
 
 SRC			:=	lst/ft_lstfirst.c				\
