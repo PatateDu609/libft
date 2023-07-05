@@ -8,7 +8,11 @@
 #include <errno.h>
 #include "libft.h"
 
+#ifdef __GLIBC__
 #define program_name program_invocation_short_name
+#else
+#define program_name getprogname()
+#endif
 
 static int64_t manage_short_opt(t_option *opts, int nb_opts, char *arg, char *arg1)
 {

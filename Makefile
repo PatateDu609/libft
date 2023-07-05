@@ -89,6 +89,13 @@ OBJ			:=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))
 DEP			:=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.d))
 SRC 		:=	$(addprefix $(PATH_SRC)/, $(SRC))
 
+
+ifeq ($(shell uname),Darwin)
+	ECHO	:=	echo
+else
+	ECHO	:=	/bin/echo -e
+endif
+
 $(PATH_OBJ)/%.o:	$(PATH_SRC)/%.c
 	@mkdir -p $(dir $@)
 	@$(ECHO) "  Compiling   \033[31m$(notdir $<)\033[0m"
